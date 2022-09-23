@@ -77,7 +77,8 @@ const apis = ref([
   { label: '七哥', url: 'https://jx.mmkv.cn/tv.php?url=' },
   { label: '虾米', url: 'https://jx.xmflv.com/?url=' },
   { label: '0523', url: 'https://go.yh0523.cn/y.cy?url=' },
-  { label: '自用小猫咪', url: 'http://ambitiousjun.xyz/player?url=' }
+  { label: '自用小猫咪', url: 'http://ambitiousjun.xyz/player?url=' },
+  { label: '备用', url: 'https://z1.m1907.top/?jx=' }
 ])
 
 // 格式化日期

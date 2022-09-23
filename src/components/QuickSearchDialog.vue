@@ -64,7 +64,8 @@ const sites = ref([
   { label: '腾讯视频', url: 'https://v.qq.com/x/search/?q=${searchKey}' },
   { label: '爱奇艺', url: 'https://so.iqiyi.com/so/q_${searchKey}' },
   { label: '优酷', url: 'https://so.youku.com/search_video/q_${searchKey}?searchfrom=1' },
-  { label: '芒果TV', url: 'https://so.mgtv.com/so?k=${searchKey}' }
+  { label: '芒果TV', url: 'https://so.mgtv.com/so?k=${searchKey}' },
+  { label: 'BiliBili', url: 'https://search.bilibili.com/all?keyword=${searchKey}' }
 ])
 
 // 显示对话框
