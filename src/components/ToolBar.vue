@@ -129,16 +129,18 @@ const createNewHistory = () => {
   const date = format(new Date())
   // 4 添加到本地记录中
   const jxHistory = JSON.parse(localStorage.getItem('jx-history'))
+  const obj = {apiName, url, date}
   // 如果之前有一样的记录就删除掉
   jxHistory.some((v, i) => {
-    if (v.apiName === apiName && v.url === url) {
+    if (v.url === url) {
+      v.tag && (obj.tag = v.tag)
       jxHistory.splice(i, 1)
       return true
     }
     return false
   })
   // 新记录插在头部
-  jxHistory.unshift({apiName, url, date})
+  jxHistory.unshift(obj)
   localStorage.setItem('jx-history', JSON.stringify(jxHistory))
 }
 
