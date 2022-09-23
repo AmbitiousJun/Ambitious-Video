@@ -2,31 +2,27 @@
 <div class="tool-bar-wrap">
   <div class="title">操作栏</div>
   <div class="player-url-wrap">
+    <div class="btn-row">
+      <el-select v-model="playWay" placeholder="-选择线路-" style="width: 150px">
+        <el-option 
+          v-for="item in apis"
+          :label="item.label" 
+          :value="item.url" />
+      </el-select>
+      <el-button 
+        @click="handlePlay"
+        type="primary"
+        size="small"
+        round
+        style="margin-left:10px;"
+        icon="Aim">解 析</el-button>
+    </div>
     <el-input
       v-model="playerUrl"
-      size="large"
       placeholder="在此粘贴视频 url 再点击解析即可"
-    >
-      <template #prepend>
-        <el-select v-model="playWay" placeholder="-选择线路-" style="width: 150px">
-          <el-option 
-            v-for="item in apis"
-            :label="item.label" 
-            :value="item.url" />
-        </el-select>
-      </template>
-      <template #append>
-        <el-button 
-          @click="handlePlay"
-          icon="Search">解 析</el-button>
-      </template>
-    </el-input>
+    />
   </div>
   <div class="btn-wrap">
-    <el-button 
-      icon="FullScreen"
-      @click="toFullScreen"
-      type="primary">全 屏</el-button>
     <el-button 
       icon="Search"
       @click="openQuickSearchDialog"
@@ -56,7 +52,7 @@ import { useStore } from 'vuex'
 import QuickSearchDialog from './QuickSearchDialog.vue'
 import HistoryDialog from './HistoryDialog.vue'
 
-const emits = defineEmits(['play', 'full-screen', 'reset-player'])
+const emits = defineEmits(['play', 'reset-player'])
 
 const store = useStore()
 
@@ -155,11 +151,6 @@ const handlePlay = () => {
   createNewHistory()
 }
 
-// 全屏模式
-const toFullScreen = () => {
-  emits('full-screen')
-}
-
 // 重置播放器
 const resetPlayer = () => {
   emits('reset-player')
@@ -182,6 +173,7 @@ const openHistoryDialog = () => {
   border-radius: 10px;
   padding: 20px;
   margin: 20px 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
   .title {
     color: #606266;
     font-weight: 600;
@@ -189,9 +181,28 @@ const openHistoryDialog = () => {
   }
   .player-url-wrap {
     margin-top: 20px;
+    background-color: #f6f6f6;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .player-url-wrap * {
+    margin: 5px 0;
   }
   .btn-wrap {
     margin-top: 20px;
+    background-color: #f6f6f6;
+    padding: 20px;
+    border-radius: 10px;
+  }
+}
+</style>
+
+<style lang="scss">
+.tool-bar-wrap {
+  .btn-wrap {
+    button {
+      margin: 5px;
+    }
   }
 }
 </style>

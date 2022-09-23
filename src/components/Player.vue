@@ -2,8 +2,11 @@
 <div class="player-wrap">
 <iframe 
   ref="videoRef"
-  src="https://cn.bing.com" 
-  id="video" />
+  allowfullscreen
+  webkitallowfullscreen
+  mozallowfullscreen
+  src="https://blog.ambitiousjun.cn" 
+  id="video-frame" />
 </div>
 </template>
 
@@ -30,20 +33,14 @@ const play = (playUrl = '', playWay = '') => {
   store.commit('setFrameUrl', videoRef.value.src)
 }
 
-// 全屏
-const fullScreen = () => {
-  videoRef.value.requestFullscreen()
-}
-
 // 重置播放器
 const reset = () => {
-  videoRef.value.src = 'https://cn.bing.com'
+  videoRef.value.src = 'https://blog.ambitiousjun.cn'
   store.commit('setFrameUrl', '')
 }
 
 defineExpose({
   play,
-  fullScreen,
   reset
 })
 </script>
@@ -51,9 +48,9 @@ defineExpose({
 <style lang="scss" scoped>
 .player-wrap {
   width: 100%;
-  #video {
+  #video-frame {
     width: 100%;
-    height: 600px;
+    height: calc(85vw * 9 / 16);
     border: 0;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
     border-radius: 10px;

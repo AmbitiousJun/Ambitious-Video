@@ -1,8 +1,8 @@
 <template>
 <div class="my-app">
+  <h2 style="color: #303133">Ambitious Video</h2>
   <tool-bar 
     @play="handlePlay"
-    @full-screen="handleFullScreen"
     @reset-player="handleResetPlayer"
   />
   <player ref="playerRef"/>
@@ -19,11 +19,6 @@ const playerRef = ref()
 // 播放视屏
 const handlePlay = ({url, way}) => {
   playerRef.value.play(url, way)
-}
-
-// 全屏播放
-const handleFullScreen = () => {
-  playerRef.value.fullScreen()
 }
 
 // 重置播放器

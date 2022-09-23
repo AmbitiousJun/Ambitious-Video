@@ -3,6 +3,7 @@
   <el-dialog 
     v-model="visible" 
     :show-close="false"
+    width="90%"
     lock-scroll
   >
     <template #header="{ close, titleId, titleClass }">
@@ -11,6 +12,7 @@
         <el-button 
           plain 
           round
+          size="small"
           type="danger" 
           @click="close"
         >
@@ -19,26 +21,28 @@
         </el-button>
       </div>
     </template>
-    <el-input
-      v-model="searchKey"
-      size="large"
-      placeholder="输入要搜索视频的关键词"
-    >
-      <template #prepend>
+    <div class="container">
+      <div class="btn-group">
         <el-select v-model="searchSite" placeholder="-选择视频网站-" style="width: 160px">
           <el-option 
             v-for="item in sites"
             :label="item.label" 
             :value="item.url" />
         </el-select>
-      </template>
-      <template #append>
         <el-button
           :disabled="!!!searchKey"
+          type="primary"
+          round
+          style="margin-left: 10px"
           @click="handleSearch"
           icon="Search">搜 索</el-button>
-      </template>
-    </el-input>
+      </div>
+      <el-input
+        v-model="searchKey"
+        placeholder="输入要搜索视频的关键词（按下回车键可快速搜索）"
+        @keydown.enter="handleSearch"
+      />
+    </div>
   </el-dialog>
 </div>
 </template>
@@ -76,6 +80,15 @@ const handleSearch = () => {
     return
   }
   window.open(site.replace('${searchKey}', key), '_blank')
+  setTimeout(() => {
+    close()
+  })
+}
+
+const close = () => {
+  visible.value = false
+  searchSite.value = ''
+  searchKey.value = ''
 }
 
 defineExpose({
@@ -94,6 +107,9 @@ defineExpose({
   .oper-wrap {
     display: flex;
     align-items: center;
+  }
+  .container * {
+    margin: 5px 0;
   }
 }
 </style>

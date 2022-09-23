@@ -3,7 +3,7 @@
   <el-dialog 
     v-model="visible" 
     :show-close="false"
-    width="70%"
+    width="90%"
     lock-scroll
   >
     <template #header="{ close, titleId, titleClass }">
@@ -13,15 +13,17 @@
           <el-button 
             plain 
             round
-            type="primary" 
+            type="primary"
+            size="small"
             @click="handleClearAllHistory"
           >
             <el-icon class="el-icon--left"><Delete /></el-icon>
-            清空所有记录
+            清空所有
           </el-button>
           <el-button 
             plain 
             round
+            size="small"
             type="danger" 
             @click="close"
           >
@@ -43,7 +45,7 @@
         </el-table-column>
         <el-table-column label="线路" prop="apiName" width="150"></el-table-column>
         <el-table-column show-overflow-tooltip label="视频地址" prop="url"></el-table-column>
-        <el-table-column label="标签" width="200">
+        <el-table-column label="标签" width="250">
           <template #default="scope">
             <el-popover
               placement="left"
