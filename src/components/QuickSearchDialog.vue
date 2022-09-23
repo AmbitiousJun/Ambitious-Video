@@ -15,7 +15,7 @@
           @click="close"
         >
           <el-icon class="el-icon--left"><CircleCloseFilled /></el-icon>
-          Close
+          关闭
         </el-button>
       </div>
     </template>

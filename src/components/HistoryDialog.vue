@@ -9,15 +9,26 @@
     <template #header="{ close, titleId, titleClass }">
       <div class="my-header">
         <h4 :id="titleId" :class="titleClass">历史解析记录</h4>
-        <el-button 
-          plain 
-          round
-          type="danger" 
-          @click="close"
-        >
-          <el-icon class="el-icon--left"><CircleCloseFilled /></el-icon>
-          Close
-        </el-button>
+        <el-button-group>
+          <el-button 
+            plain 
+            round
+            type="primary" 
+            @click="handleClearAllHistory"
+          >
+            <el-icon class="el-icon--left"><Delete /></el-icon>
+            清空所有记录
+          </el-button>
+          <el-button 
+            plain 
+            round
+            type="danger" 
+            @click="close"
+          >
+            <el-icon class="el-icon--left"><CircleCloseFilled /></el-icon>
+            关闭
+          </el-button>
+        </el-button-group>
       </div>
     </template>
     <div class="container">
@@ -100,7 +111,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 const emits = defineEmits(['continue-play'])
 
@@ -121,6 +132,22 @@ const initJxHistory = () => {
   data.value = jxHistory
   popoverVisibles.value = new Array(data.value.length)
   popoverVisibles.value.fill(false)
+}
+
+// 清空所有历史记录
+const handleClearAllHistory = () => {
+  ElMessageBox.confirm(
+    '确定清空所有记录吗？（不可恢复）',
+    '警告',
+    {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }
+  ).then(() => {
+    localStorage.setItem('jx-history', '[]')
+    data.value = []
+  }).catch(() => {})
 }
 
 // 续播视频
