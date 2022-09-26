@@ -86,7 +86,7 @@
               </template>
               <el-autocomplete
                 v-model="tagInputText"
-                maxlength="15"
+                maxlength="30"
                 :fetch-suggestions="querySearch"
                 :trigger-on-focus="false"
                 @select="handleSelect($event, scope.$index)"
