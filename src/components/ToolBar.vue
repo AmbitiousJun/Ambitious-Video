@@ -72,14 +72,15 @@ const canExit = computed(() => !!store.state.curFrameUrl)
 
 const apis = ref([
   { label: 'Mao', url: 'https://www.mtosz.com/m3u8.php?url=' },
+  { label: '自用小猫咪', url: 'http://ambitiousjun.xyz/player?url=' },
   { label: 'LLQ', url: 'https://player.maqq.cn/?url=' },
   { label: '麒麟', url: 'https://jx.quankan.app/?url=' },
-  { label: '诺讯', url: 'https://www.nxflv.com/?url=' },
-  { label: '爱豆', url: 'https://jx.aidouer.net/?url=' },
+  { label: 'M3U8', url: 'https://jx.m3u8.tv/jiexi/?url=' },
   { label: '七哥', url: 'https://jx.mmkv.cn/tv.php?url=' },
   { label: '虾米', url: 'https://jx.xmflv.com/?url=' },
+  { label: '爱豆', url: 'https://jx.aidouer.net/?url=' },
   { label: '0523', url: 'https://go.yh0523.cn/y.cy?url=' },
-  { label: '自用小猫咪', url: 'http://ambitiousjun.xyz/player?url=' },
+  { label: '诺讯', url: 'https://www.nxflv.com/?url=' },
   { label: '备用', url: 'https://z1.m1907.top/?jx=' }
 ])
 
