@@ -79,7 +79,6 @@ const apis = ref([
   { label: '七哥', url: 'https://jx.mmkv.cn/tv.php?url=' },
   { label: '爱豆', url: 'https://jx.aidouer.net/?url=' },
   { label: '0523', url: 'https://go.yh0523.cn/y.cy?url=' },
-  { label: '诺讯', url: 'https://www.nxflv.com/?url=' },
   { label: '备用', url: 'https://z1.m1907.top/?jx=' }
 ])
 
