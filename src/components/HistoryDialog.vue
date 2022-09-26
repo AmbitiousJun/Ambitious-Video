@@ -34,7 +34,20 @@
       </div>
     </template>
     <div class="container">
-      <el-table @cell-click="handleCellClick" :data="data" style="width: 100%">
+      <el-button 
+        icon="delete"
+        size="small"
+        @click="handleBatchDelete"
+        :disabled="multipleSelection.length <= 0"
+        style="margin-bottom: 10px"
+        type="danger">批量删除</el-button>
+      <el-table 
+        @cell-click="handleCellClick" 
+        :data="data" 
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column type="selection" width="55" />
         <el-table-column label="时间" width="180">
           <template #default="scope">
             <div style="display: flex; align-items: center">
@@ -56,7 +69,7 @@
         <el-table-column label="标签" width="250">
           <template #default="scope">
             <el-popover
-              placement="left"
+              placement="top"
               :width="250"
               :hide-after="0"
               v-model:visible="popoverVisibles[scope.$index]"
@@ -140,12 +153,44 @@ const popoverVisibles = ref([])
 // 设置标签时的文本
 const tagInputText = ref('')
 
+// 选中的多选框
+const multipleSelection = ref([])
+
 // 初始化解析记录
 const initJxHistory = () => {
   const jxHistory = JSON.parse(localStorage.getItem('jx-history'))
   data.value = jxHistory
   popoverVisibles.value = new Array(data.value.length)
   popoverVisibles.value.fill(false)
+}
+
+// 复选框选中项发生改变
+const handleSelectionChange = (val) => {
+  multipleSelection.value = val
+}
+
+// 批量删除记录
+const handleBatchDelete = () => {
+  ElMessageBox.confirm(
+    '确定删除吗？（不可恢复）',
+    '警告',
+    {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }
+  ).then(() => {
+    multipleSelection.value.forEach(v => {
+      data.value.some((d, i) => {
+        if (d.date === v.date) {
+          data.value.splice(i, 1)
+          return true
+        }
+        return false
+      })
+    })
+    updateHistory()
+  }).catch(() => {})
 }
 
 // 标签输入框，选中自动补全
