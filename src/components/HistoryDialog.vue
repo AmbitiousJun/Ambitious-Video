@@ -44,7 +44,15 @@
           </template>
         </el-table-column>
         <el-table-column label="线路" prop="apiName" width="150"></el-table-column>
-        <el-table-column show-overflow-tooltip label="视频地址" prop="url"></el-table-column>
+        <el-table-column show-overflow-tooltip label="视频地址">
+          <template #default="scope">
+            <el-link 
+              :href="scope.row.url"
+              target="_blank"
+              type="primary"
+            >{{ scope.row.url }}</el-link>
+          </template>
+        </el-table-column>
         <el-table-column label="标签" width="250">
           <template #default="scope">
             <el-popover
@@ -63,9 +71,13 @@
                   <el-check-tag>设置标签</el-check-tag>
                 </div>
               </template>
-              <el-input
+              <el-autocomplete
                 v-model="tagInputText"
                 maxlength="15"
+                :fetch-suggestions="querySearch"
+                :trigger-on-focus="false"
+                @select="handleSelect($event, scope.$index)"
+                clearable
                 placeholder="标签名"
               >
                 <template #append>
@@ -74,7 +86,7 @@
                     :disabled="!!!tagInputText"
                     icon="Check"/>
                 </template>
-              </el-input>
+              </el-autocomplete>
             </el-popover>
           </template>
         </el-table-column>
@@ -134,6 +146,24 @@ const initJxHistory = () => {
   data.value = jxHistory
   popoverVisibles.value = new Array(data.value.length)
   popoverVisibles.value.fill(false)
+}
+
+// 标签输入框，选中自动补全
+const handleSelect = (item, index) => {
+  setTimeout(() => {
+    popoverVisibles.value[index] = true
+  }, 100)
+}
+
+// 标签输入框自动补全
+const querySearch = (str = '', cb = () => {}) => {
+  const tags = data.value.map(v => v.tag).filter(v => {
+    if (!v) {
+      return false
+    }
+    return v.toLowerCase().indexOf(str.toLowerCase()) !== -1
+  })
+  cb(tags.map(v => ({value: v})))
 }
 
 // 清空所有历史记录
