@@ -73,6 +73,8 @@ const canExit = computed(() => !!store.state.curFrameUrl)
 const apis = ref([
   { label: 'Mao', url: 'https://www.mtosz.com/m3u8.php?url=' },
   { label: 'LLQ', url: 'https://player.maqq.cn/?url=' },
+  { label: '麒麟', url: 'https://jx.quankan.app/?url=' },
+  { label: '诺讯', url: 'https://www.nxflv.com/?url=' },
   { label: '爱豆', url: 'https://jx.aidouer.net/?url=' },
   { label: '七哥', url: 'https://jx.mmkv.cn/tv.php?url=' },
   { label: '虾米', url: 'https://jx.xmflv.com/?url=' },
