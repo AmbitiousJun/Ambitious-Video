@@ -42,7 +42,6 @@
         style="width:100%"
         ref="searchInputRef"
         :teleported="false"
-        highlight-first-item
         select-when-unmatched
         :fetch-suggestions="querySearch"
         placeholder="输入要搜索视频的关键词（按下回车键可快速搜索）"
